@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="Y1_AIRLINE_DFLC_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Airline" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="AirlineID"/>
+                </Key>
+                <Property Name="AirlineID" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Airline" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AirlineName" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Airline" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CurrencyCode" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Airline Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Url" Type="Edm.String" Nullable="false" MaxLength="255" sap:unicode="false" sap:label="URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="toFlightPlanNavigation" Relationship="Y1_AIRLINE_DFLC_SRV.toFlightPlan" FromRole="FromRole_toFlightPlan" ToRole="ToRole_toFlightPlan"/>
+            </EntityType>
+            <EntityType Name="FlightPlan" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="AirlineID"/>
+                    <PropertyRef Name="ConnectionID"/>
+                </Key>
+                <Property Name="AirlineID" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Airline" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ConnectionID" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Flight Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CountryFrom" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Cityfrom" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Depart.city" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AirportFrom" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Dep. airport" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CountryTo" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CityTo" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Arrival city" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AirportTo" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Dest. airport" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlightTime" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Flight time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DepartureTime" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Departure" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ArrivalTime" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Arrival Time" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Distance" Type="Edm.Decimal" Nullable="false" Precision="9" Scale="4" sap:unicode="false" sap:label="Distance" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DistanceUnit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Distance in" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlightType" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Charter" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Period" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="n day(s) later" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="toFlightPlan" sap:content-version="1">
+                <End Type="Y1_AIRLINE_DFLC_SRV.Airline" Multiplicity="1" Role="FromRole_toFlightPlan"/>
+                <End Type="Y1_AIRLINE_DFLC_SRV.FlightPlan" Multiplicity="*" Role="ToRole_toFlightPlan"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_toFlightPlan">
+                        <PropertyRef Name="AirlineID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_toFlightPlan">
+                        <PropertyRef Name="AirlineID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="Y1_AIRLINE_DFLC_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="AirlineSet" EntityType="Y1_AIRLINE_DFLC_SRV.Airline" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="FlightPlanSet" EntityType="Y1_AIRLINE_DFLC_SRV.FlightPlan" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="toFlightPlanSet" Association="Y1_AIRLINE_DFLC_SRV.toFlightPlan" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="AirlineSet" Role="FromRole_toFlightPlan"/>
+                    <End EntitySet="FlightPlanSet" Role="ToRole_toFlightPlan"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://vhcalnplci:8000/sap/opu/odata/sap/Y1_AIRLINE_DFLC_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://vhcalnplci:8000/sap/opu/odata/sap/Y1_AIRLINE_DFLC_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
