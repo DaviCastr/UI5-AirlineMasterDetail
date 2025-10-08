@@ -237,7 +237,7 @@ export default class List extends BaseController {
         // set the layout property of FCL control to show two columns
         this.getModel<JSONModel>("appView").setProperty("/layout", "TwoColumnsMidExpanded");
         this.getRouter().navTo("object", {
-            objectId: item.getBindingContext()!.getProperty("AirlineID")
+            AirlineID: item.getBindingContext()!.getProperty("AirlineID")
         }, undefined, !system.phone);
     }
 

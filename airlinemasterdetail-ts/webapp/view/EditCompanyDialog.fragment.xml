@@ -1,0 +1,46 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Dialog
+        id="editCompanyDialog"
+        stretch="false"
+        resizable="true"
+        draggable="true"
+        title="{= ${AirlineID} ? ${i18n>edit_company_title} : ${i18n>new_company_title} }"
+        class="sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+    >
+        <VBox>
+            <Label text="{i18n>airlineId}" />
+            <Input
+                value="{AirlineID}"
+                visible="{= !${editCompanyModel>/isNew} }"
+            />
+
+            <Label text="{i18n>airlineName}" />
+            <Input value="{AirlineName}" />
+
+            <Label text="{i18n>currencyCode}" />
+            <Input value="{CurrencyCode}" />
+
+            <Label text="{i18n>url}" />
+            <Input value="{Url}" />
+        </VBox>
+        <endButton>
+            <Button
+                text="{i18n>btnSave}"
+                press=".onSave"
+            />
+            <Button
+                text="{i18n>btnCancel}"
+                press=".onCancel"
+            />
+            <Button
+                text="{i18n>btnDelete}"
+                press=".onDelete"
+                visible="{= !${editCompanyModel>/isNew} }"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
