@@ -1,0 +1,291 @@
+<mvc:View
+    controllerName="apps.dflc.airlinemasterdetailts.controller.FlightDetail"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <Page id="_IDGenPage"
+        title="{i18n>FlightDetailsOf}{Connid}"
+        showNavButton="true"
+        navButtonPress="onNavBack"
+    >
+        <content>
+            <VBox id="_IDGenVBox" class="sapUiSmallMargin">
+                <!-- Origin Information -->
+                <f:Form
+                    id="formOrigin"
+                    editable="true"
+                >
+                    <f:title>
+                        <core:Title id="_IDGenTitle1" text="{i18n>origin_flight_title}" />
+                    </f:title>
+                    <f:layout>
+                        <f:ResponsiveGridLayout id="_IDGenResponsiveGridLayout"
+                            labelSpanXL="3"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="4"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            emptySpanS="0"
+                            columnsXL="1"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer id="_IDGenFormContainer">
+                            <f:formElements>
+                                <f:FormElement id="_IDGenFormElement" label="{i18n>number_flight_lbl}">
+                                    <f:fields>
+                                        <Input
+                                            id="connectionInp"
+                                            enabled="{editFlightModel>/isNew}"
+                                            value="{ConnectionID}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement id="_IDGenFormElement1"
+                                    label="{i18n>country_origin_flight_lbl}"
+                                >
+                                    <f:fields>
+                                        <Input
+                                            id="countryFromInp"
+                                            value="{CountryFrom}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement id="_IDGenFormElement2"
+                                    label="{i18n>city_origin_flight_lbl}"
+                                >
+                                    <f:fields>
+                                        <Input
+                                            id="cityfromInp"
+                                            value="{Cityfrom}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement id="_IDGenFormElement3"
+                                    label="{i18n>airport_origin_flight_lbl}"
+                                >
+                                    <f:fields>
+                                        <Input
+                                            id="airportFromInp"
+                                            value="{AirportFrom}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+
+                <!-- Destination Information -->
+                <f:Form
+                    id="formDestination"
+                    editable="true"
+                >
+                    <f:title>
+                        <core:Title id="_IDGenTitle2" text="{i18n>destination_flight_title}" />
+                    </f:title>
+                    <f:layout>
+                        <f:ResponsiveGridLayout id="_IDGenResponsiveGridLayout1"
+                            labelSpanXL="3"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="4"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            emptySpanS="0"
+                            columnsXL="1"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer id="_IDGenFormContainer1">
+                            <f:formElements>
+                                <f:FormElement id="_IDGenFormElement4"
+                                    label="{i18n>country_destination_flight_lbl}"
+                                >
+                                    <f:fields>
+                                        <Input
+                                            id="countryToInp"
+                                            value="{CountryTo}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement id="_IDGenFormElement5"
+                                    label="{i18n>city_destination_flight_lbl}"
+                                >
+                                    <f:fields>
+                                        <Input
+                                            id="cityToInp"
+                                            value="{CityTo}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement id="_IDGenFormElement6"
+                                    label="{i18n>airport_destination_flight_lbl}"
+                                >
+                                    <f:fields>
+                                        <Input
+                                            id="airportToInp"
+                                            value="{AirportTo}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+
+                <!-- Additional Information -->
+                <f:Form
+                    id="formAdditionalInformation"
+                    editable="true"
+                >
+                    <f:title>
+                        <core:Title id="_IDGenTitle3"
+                            text="{i18n>additionalInformationn_flight_title}"
+                        />
+                    </f:title>
+                    <f:layout>
+                        <f:ResponsiveGridLayout id="_IDGenResponsiveGridLayout2"
+                            labelSpanXL="3"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="4"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            emptySpanS="0"
+                            columnsXL="1"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false"
+                        />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer id="_IDGenFormContainer2">
+                            <f:formElements>
+                                <f:FormElement id="_IDGenFormElement7"
+                                    label="{i18n>flightDurationLabel}"
+                                >
+                                    <f:fields>
+                                        <Input
+                                            type="Number"
+                                            id="flightTimeInp"
+                                            value="{path: 'FlightTime', type: 'sap.ui.model.odata.type.Int32'}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement id="_IDGenFormElement8"
+                                    label="{i18n>departureTimeLabel}"
+                                >
+                                    <f:fields>
+                                        <TimePicker
+                                            id="departureTimeTp"
+                                            value="{DepartureTime}"
+                                            valueFormat="HHmmss"
+                                            displayFormat="HH:mm:ss"
+                                            maskMode="On"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement id="_IDGenFormElement9" label="{i18n>arrivaTime}">
+                                    <f:fields>
+                                        <TimePicker
+                                            id="arrivalTimeTp"
+                                            value="{ArrivalTime}"
+                                            valueFormat="HHmmss"
+                                            displayFormat="HH:mm:ss"
+                                            maskMode="On"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement id="_IDGenFormElement10" label="{i18n>distanceLabel}">
+                                    <f:fields>
+                                        <Input
+                                            id="distanceInp"
+                                            value="{Distance}"
+                                        />
+                                        <Select
+                                            id="distanceUnit"
+                                            selectedKey="{DistanceUnit}"
+                                        >
+                                            <items>
+                                                <core:Item id="_IDGenItem"
+                                                    text="Miles"
+                                                    key="MI"
+                                                />
+                                                <core:Item id="_IDGenItem1"
+                                                    text="KM"
+                                                    key="KM"
+                                                />
+                                            </items>
+                                        </Select>
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement id="_IDGenFormElement11" label="{i18n>flightTypeLabel}">
+                                    <f:fields>
+                                        <Select
+                                            id="flightTypeId"
+                                            selectedKey="{FlightType}"
+                                        >
+                                            <items>
+                                                <core:Item id="_IDGenItem2"
+                                                    text="Regular"
+                                                    key=""
+                                                />
+                                                <core:Item id="_IDGenItem3"
+                                                    text="Chartered"
+                                                    key="X"
+                                                />
+                                            </items>
+                                        </Select>
+                                    </f:fields>
+                                </f:FormElement>
+
+                                <f:FormElement id="_IDGenFormElement12" label="{i18n>arrivalDaysLabel}">
+                                    <f:fields>
+                                        <Input
+                                            id="periodId"
+                                            value="{Period}"
+                                        />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+            </VBox>
+        </content>
+
+        <footer>
+            <OverflowToolbar id="_IDGenOverflowToolbar2">
+                <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                <Button id="_IDGenButton3"
+                    text="{i18n>btnSave}"
+                    type="Accept"
+                    press=".onBtnSavePress"
+                />
+                <Button id="_IDGenButton4"
+                    text="{i18n>btnDelete}"
+                    type="Negative"
+                    press=".onBtnDeletePress"
+                    visible="{= !${editFlightModel>/isNew} }"
+                />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

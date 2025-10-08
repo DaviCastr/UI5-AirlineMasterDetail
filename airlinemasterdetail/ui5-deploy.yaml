@@ -13,11 +13,19 @@ builder:
     - name: deploy-to-abap
       afterTask: generateCachebusterInfo
       configuration:
+        log: 5
+        verbose: true
+        destination: sap
         target:
-          url: http://vhcalnplci:8000
-          client: "001"
+          destination: sap
+          url: http://sap:8000
+          client: '001'
         app:
           name: YY1_AIRM_DFLC
           description: Airline Master Detail
           package: Y1_AIRLINE_DFLC
           transport: NPLK900075
+        exclude:
+          - /test/
+        logging:
+          level: debug

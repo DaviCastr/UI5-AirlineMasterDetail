@@ -87,11 +87,20 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "TwoWay",
+          "useBatch": true,
+          "defaultUpdateMethod": "PUT"
+        }
       },
       "editCompanyModel": {
         "type": "sap.ui.model.json.JSONModel",
-        "uri": "model/EditCompany.json"
+        "uri": "model/editCompany.json"
+      },
+      "editFlightModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/editFlight.json"
       }
     },
     "resources": {
@@ -119,6 +128,11 @@
           "pattern": "AirlineSet/{AirlineID}",
           "name": "object",
           "target": ["list", "object"]
+        },
+        {
+          "pattern": "FlightPlanSet/{AirlineID}/{ConnectionID}",
+          "name": "flightDetail",
+          "target": ["list", "flightDetail"]
         }
       ],
       "targets": {
@@ -130,6 +144,12 @@
         "object": {
           "viewName": "Detail",
           "viewId": "detail",
+          "viewLevel": 1,
+          "controlAggregation": "midColumnPages"
+        },
+        "flightDetail": {
+          "viewName": "FlightDetail",
+          "viewId": "flightDetail",
           "viewLevel": 1,
           "controlAggregation": "midColumnPages"
         },

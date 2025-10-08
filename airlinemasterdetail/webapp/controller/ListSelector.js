@@ -1,103 +1,90 @@
-sap.ui.define([
-    "sap/ui/base/Object",
-    "sap/base/Log"
-], function (BaseObject, Log) {
+sap.ui.define(["sap/ui/base/Object", "sap/base/Log"], function(UI5Object, Log) {
     "use strict";
 
-    return BaseObject.extend("apps.dflc.airlinemasterdetail.controller.ListSelector", {
-
+    /**
+   * @namespace apps.dflc.airlinemasterdetailts
+   */
+    const ListSelector = UI5Object.extend("apps.dflc.airlinemasterdetail.ListSelector", {
         /**
-         * Provides a convenience API for selecting list items. All the functions will wait until the initial load of the a List passed to the instance by the setBoundMasterList
-         * function.
-         * @class
-         * @public
-         */
-
-        constructor : function () {
-            this._oWhenListHasBeenSet = new Promise(function (fnResolveListHasBeenSet) {
+     * Provides a convenience API for selecting list items. All the functions will wait until the initial load of the a List passed to the instance by the setBoundMasterList
+     * function.
+     */
+        constructor: function _constructor() {
+            UI5Object.prototype.constructor.call(this);
+            this._oWhenListHasBeenSet = new Promise(function(fnResolveListHasBeenSet) {
                 this._fnResolveListHasBeenSet = fnResolveListHasBeenSet;
-            }.bind(this));
+            }
+            .bind(this));
             // This promise needs to be created in the constructor, since it is allowed to
-            // invoke selectItem functions before calling setBoundMasterList
-            this.oWhenListLoadingIsDone = new Promise(function (fnResolve, fnReject) {
-                this._oWhenListHasBeenSet
-                    .then(function (oList) {
-                        oList.getBinding("items").attachEventOnce("dataReceived",
-                            function () {
-                                if (this._oList.getItems().length) {
-                                    fnResolve({
-                                        list : oList
-                                    });
-                                } else {
-                                    // No items in the list
-                                    fnReject({
-                                        list : oList
-                                    });
-                                }
-                            }.bind(this)
-                        );
-                    }.bind(this));
-            }.bind(this));
-        },
-
-        /**
-         * A bound list should be passed in here. Should be done, before the list has received its initial data from the server.
-         * May only be invoked once per ListSelector instance.
-         * @param {sap.m.List} oList The list all the select functions will be invoked on.
-         * @public
-         */
-        setBoundMasterList : function (oList) {
-            this._oList = oList;
-            this._fnResolveListHasBeenSet(oList);
-        },
-
-        /**
-         * Tries to select and scroll to a list item with a matching binding context. If there are no items matching the binding context or the ListMode is none,
-         * no selection/scrolling will happen
-         * @param {string} sBindingPath the binding path matching the binding path of a list item
-         * @public
-         */
-        selectAListItem : function (sBindingPath) {
-
-            this.oWhenListLoadingIsDone.then(
-                function () {
-                    var oList = this._oList,
-                        oSelectedItem;
-
-                    if (oList.getMode() === "None") {
-                        return;
-                    }
-
-                    oSelectedItem = oList.getSelectedItem();
-
-                    // skip update if the current selection is already matching the object path
-                    if (oSelectedItem && oSelectedItem.getBindingContext().getPath() === sBindingPath) {
-                        return;
-                    }
-
-                    oList.getItems().some(function (oItem) {
-                        if (oItem.getBindingContext() && oItem.getBindingContext().getPath() === sBindingPath) {
-                            oList.setSelectedItem(oItem);
-                            return true;
+            // invoke selectItem functions before calling setBoundList
+            this.oWhenListLoadingIsDone = new Promise(function(resolve, reject) {
+                this._oWhenListHasBeenSet.then(function(list) {
+                    list.getBinding("items")?.attachEventOnce("dataReceived", function() {
+                        if (this.list.getItems().length) {
+                            resolve({
+                                list
+                            });
+                        } else {
+                            // No items in the list
+                            reject({
+                                list
+                            });
                         }
-                    });
-                }.bind(this),
-                function () {
-                    Log.warning("Could not select the list item with the path" + sBindingPath + " because the list encountered an error or had no items");
+                    }
+                    .bind(this));
                 }
-            );
+                .bind(this));
+            }
+            .bind(this));
         },
-
         /**
-         * Removes all selections from list.
-         * Does not trigger 'selectionChange' event on list, though.
-         * @public
-         */
-        clearMasterListSelection : function () {
-            //use promise to make sure that 'this._oList' is available
-            this._oWhenListHasBeenSet.then(function () {
-                this._oList.removeSelections(true);
-            }.bind(this));
+     * A bound list should be passed in here. Should be done, before the list has received its initial data from the server.
+     * May only be invoked once per ListSelector instance.
+     * @param list The list all the select functions will be invoked on.
+     *
+     */
+        setBoundList: function _setBoundList(list) {
+            this.list = list;
+            this._fnResolveListHasBeenSet(list);
+        },
+        /**
+     * Tries to select and scroll to a list item with a matching binding context. If there are no items matching the binding context or the ListMode is none,
+     * no selection/scrolling will happen
+     * @param path the binding path matching the binding path of a list item
+     *
+     */
+        selectAListItem: function _selectAListItem(path) {
+            this.oWhenListLoadingIsDone.then(function() {
+                const list = this.list;
+                if (list.getMode() === "None") {
+                    return;
+                }
+
+                // skip update if the current selection is already matching the object path
+                const selectedItem = list.getSelectedItem();
+                if (selectedItem && selectedItem.getBindingContext().getPath() === path) {
+                    return;
+                }
+                list.getItems().some(function(oItem) {
+                    if (oItem.getBindingContext() && oItem.getBindingContext().getPath() === path) {
+                        list.setSelectedItem(oItem);
+                        return true;
+                    }
+                });
+            }
+            .bind(this), function() {
+                Log.warning("Could not select the list item with the path" + path + " because the list encountered an error or had no items");
+            });
+        },
+        /**
+     * Removes all selections from list.
+     * Does not trigger 'selectionChange' event on list, though.
+     */
+        clearListSelection: async function _clearListSelection() {
+            //use promise to make sure that 'this.list' is available
+            await this._oWhenListHasBeenSet;
+            this.list.removeSelections(true);
         }
     });
+    return ListSelector;
 });

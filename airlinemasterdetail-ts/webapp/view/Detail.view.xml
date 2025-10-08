@@ -2,61 +2,92 @@
     controllerName="apps.dflc.airlinemasterdetailts.controller.Detail"
     xmlns="sap.m"
     xmlns:semantic="sap.f.semantic"
-    xmlns:mvc="sap.ui.core.mvc">
-
+    xmlns:mvc="sap.ui.core.mvc"
+>
     <semantic:SemanticPage
         id="detailPage"
         busy="{detailView>/busy}"
-        busyIndicatorDelay="{detailView>/delay}">
+        busyIndicatorDelay="{detailView>/delay}"
+    >
         <semantic:titleHeading>
             <Title
+                id="_IDGenTitle"
                 text="{AirlineName}"
-                level="H2"/>
+                level="H2"
+            />
         </semantic:titleHeading>
         <semantic:headerContent>
-            <ObjectAttribute title="{i18n>priceTitle}"/>
-            <ObjectNumber />
+            <ObjectAttribute
+                id="_IDGenObjectAttribute"
+                title="{i18n>siteTxt}" 
+                text="{Url}"
+            />
+            <ObjectNumber id="_IDGenObjectNumber" />
         </semantic:headerContent>
         <semantic:content>
-
             <Table
                 id="lineItemsList"
                 width="auto"
                 items="{toFlightPlanNavigation}"
                 updateFinished=".onListUpdateFinished"
                 noDataText="{i18n>detailLineItemTableNoDataText}"
-                busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+                busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+            >
                 <headerToolbar>
-                    <Toolbar>
+                    <Toolbar id="_IDGenToolbar">
                         <Title
                             id="lineItemsTitle"
                             text="{detailView>/lineItemListTitle}"
                             titleStyle="H3"
-                            level="H3"/>
+                            level="H3"
+                        />
+                        <ToolbarSpacer id="_IDGenToolbarSpacer3" />
+                        <Button
+                            id="_IDGenButton5"
+                            icon="sap-icon://create"
+                            text="{i18n>btnNew}"
+                            press=".onBtnCreatePress"
+                        />
                     </Toolbar>
                 </headerToolbar>
                 <columns>
-                    <Column>
-                        <Text text="{i18n>detailLineItemTableIDColumn}"/>
+                    <Column id="_IDGenColumn1">
+                        <Text
+                            id="_IDGenText"
+                            text="{i18n>detailLineItemTableIDColumn}"
+                        />
                     </Column>
                     <Column
+                        id="_IDGenColumn2"
                         minScreenWidth="Tablet"
                         demandPopin="true"
-                        hAlign="End">
-                        <Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+                        hAlign="End"
+                    >
+                        <Text
+                            id="_IDGenText1"
+                            text="{i18n>detailLineItemTableUnitNumberColumn}"
+                        />
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem>
+                    <ColumnListItem
+                        id="_IDGenColumnListItem"
+                        type="Navigation"
+                        press=".onListItemPressed"
+                    >
                         <cells>
                             <ObjectIdentifier
+                                id="_IDGenObjectIdentifier"
                                 title="{Cityfrom}"
-                                text="{AirlineID}"/>
+                                text="{AirlineID}"
+                            />
                             <ObjectNumber
+                                id="_IDGenObjectNumber1"
                                 number="{
                                     path: 'FlightTime',
                                     formatter: '.formatter.currencyValue'
-                                }" />
+                                }"
+                            />
                         </cells>
                     </ColumnListItem>
                 </items>
@@ -66,28 +97,37 @@
         <semantic:sendEmailAction>
             <semantic:SendEmailAction
                 id="shareEmail"
-                press=".onSendEmailPress"/>
+                press=".onSendEmailPress"
+            />
         </semantic:sendEmailAction>
+
+        <semantic:editAction>
+            <semantic:EditAction
+                id="editCompanyBtn"
+                press=".onEditCompanyBtnPress"
+            />
+        </semantic:editAction>
 
         <semantic:closeAction>
             <semantic:CloseAction
-                    id="closeColumn"
-                    press=".onCloseDetailPress"/>
+                id="closeColumn"
+                press=".onCloseDetailPress"
+            />
         </semantic:closeAction>
 
         <semantic:fullScreenAction>
             <semantic:FullScreenAction
-                    id="enterFullScreen"
-                    visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
-                    press=".toggleFullScreen"/>
+                id="enterFullScreen"
+                visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+                press=".toggleFullScreen"
+            />
         </semantic:fullScreenAction>
         <semantic:exitFullScreenAction>
             <semantic:ExitFullScreenAction
-                    id="exitFullScreen"
-                    visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
-                    press=".toggleFullScreen"/>
+                id="exitFullScreen"
+                visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+                press=".toggleFullScreen"
+            />
         </semantic:exitFullScreenAction>
-
     </semantic:SemanticPage>
-
 </mvc:View>

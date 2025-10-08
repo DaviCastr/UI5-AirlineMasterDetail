@@ -14,8 +14,8 @@ builder:
       afterTask: generateCachebusterInfo
       configuration:
         target:
-          url: http://vhcalnplci:8000
-          client: "001"
+          url: http://sap:8000/sap
+          destination: sap
         app:
           name: YY1_AIRMTS_DFLC
           description: Airline Master Details TS
