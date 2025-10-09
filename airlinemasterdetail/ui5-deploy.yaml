@@ -17,8 +17,9 @@ builder:
         verbose: true
         destination: sap
         target:
-          destination: sap
-          url: http://sap:8000
+          #url: http://sap:8000
+          #destination: sap
+          url: http://vhcalnplci:8000
           client: '001'
         app:
           name: YY1_AIRM_DFLC
